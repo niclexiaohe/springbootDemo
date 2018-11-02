@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--引入公共head-->
+    <th:block th:include="base/baseHead :: base_head"/>
+    <meta charset="UTF-8">
+    <title>role角色</title>
+    <script type="text/javascript">
+        var dataGrid;
+        $(function () {
+            initGrid();
+        });
+
+        function initGrid() {
+            dataGrid = $('#dataGrid').datagrid({
+                url:_ctxPath + '/role/listByPage',
+                idField: 'id',
+                //表示是否启用该列的 tooptip 效果
+                // tooltip: true,
+                //是否启用行数据的 tooltip 功能
+                rowTooltip: true,
+                //是否启用右键菜单中的“导出数据”菜单项功能
+                exportMenu: false,
+                //该属性表示是否启用 easyui-datagrid 的表头列点击按钮菜单
+                enableHeaderClickMenu: false,
+                //该属性表示是否启用 easyui-treegrid 的表头右键菜单
+                enableHeaderContextMenu: true,
+                singleSelect: true,
+                pagination: true,
+                fit: true,
+                fitColumns: true,
+                border: false,
+                columns: [
+                    [
+                        {
+                            checkbox: true
+                        },
+                        {
+                            field: 'id',
+                            align: "center",
+                            sortable: true,
+                            title: "id",
+                            hidden: true
+                        },
+                        {
+                            field: 'roleType',
+                            sortable: true,
+                            align: "center",
+                            width: 150,
+                            title: "角色类型"
+                        },
+                        {
+                            field: 'roleDesc',
+                            sortable: true,
+                            align: "center",
+                            width: 150,
+                            title: "角色描述"
+                        },
+                        {
+                            field: 'creator',
+                            sortable: true,
+                            align: "center",
+                            width: 60,
+                            title: "创建人"
+                        },
+                        {
+                            field: 'createTime',
+                            sortable: true,
+                            align: "center",
+                            width: 120,
+                            title: "创建时间"
+                        },
+                        {
+                            field: 'modifier',
+                            sortable: true,
+                            align: "center",
+                            width: 100,
+                            title: "最后修改人"
+                        },
+                        {
+                            field: 'modifiedTime',
+                            sortable: true,
+                            align: "center",
+                            width: 120,
+                            title: "最后修改时间"
+                        }
+                    ]
+                ],
+                // toolbar: '#toolbar',
+                onLoadSuccess: function () {
+                    dataGrid.datagrid("clearSelections");
+                }
+            });
+            // $.easyui.loaded(mainName, true);
+        }
+    </script>
+</head>
+<body>
+    <div class="easyui-layout" data-options="fit:true,border:false">
+        <div data-options="region:'north',title:'查询条件',border:false"
+            style="height: 70px;overflow: hidden;">
+            <form id="searchForm" class="form-inline" method="post">
+
+                <!--<div class="input-prepend">-->
+                    <!--<span class="add-on"><fmt:message key="system.log.accountName"/></span>-->
+                    <!--<input type="text" id="accountName" name="accountName"/>-->
+                <!--</div>-->
+        <!---->
+                <!--<div class="input-prepend">-->
+                    <!--<span class="add-on"><fmt:message key="system.log.operationName"/></span>-->
+                    <!--<input type="text" id="operationType" name="operId"/>-->
+                <!--</div>-->
+        <!---->
+                <!--<div class="input-prepend">-->
+                    <!--<span class="add-on"><fmt:message key="system.log.startTime"/></span>-->
+                    <!--<input type="text" id="startTime" name="startTime"-->
+                           <!--class="Wdate easyui-validatebox" data-options="validType:'length[0,20]'"-->
+                           <!--onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'endTime\')}'})"-->
+                           <!--onmouseover="this.style.cursor='hand';"/>-->
+                <!--</div>-->
+                <!--<div class="input-prepend">-->
+                    <!--<span class="add-on"><fmt:message key="system.log.endTime"/></span>-->
+                    <!--<input type="text" id="endTime" name="endTime"-->
+                           <!--class="Wdate easyui-validatebox" data-options="validType:'length[0,20]'"-->
+                           <!--onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'startTime\')}'})"-->
+                           <!--onmouseover="this.style.cursor='hand';"/>-->
+                <!--</div>-->
+            </form>
+        </div>
+
+        <div data-options="region:'center',border:false,title:'用户列表'">
+        <table id="dataGrid"></table>
+
+        </div>
+    </div>
+<!--<div id="toolbar" style="display: none;">-->
+    <!--<a onclick="searchData()" id="searchButton" href="javascript:void(0)" class="easyui-linkbutton"-->
+       <!--data-options="iconCls:'icon-hamburg-future',plain:true"><fmt:message key="globle.button.serach"/></a>-->
+    <!--<a onclick="exportExcel()" id="exportButton" href="javascript:void(0)" class="easyui-linkbutton"-->
+       <!--data-options="iconCls:'icon-standard-page-white-excel',disabled:true,plain:true"><fmt:message-->
+            <!--key="globle.button.export"/></a>-->
+    <!--<a onclick="clearForm()" id="clearButton" href="javascript:void(0)" class="easyui-linkbutton"-->
+       <!--data-options="iconCls:'icon-standard-delete',plain:true"><fmt:message key="globle.button.clearForm"/></a>-->
+<!--</div>-->
+</body>
+</html>

@@ -1,0 +1,32 @@
+body{
+    background-color: #2aabd2;
+}
+.loginBackGround{
+    width: 100%;
+    height:100%;
+    min-width: 700px;
+    min-height: 600px;
+    background-color: #2aabd2;
+}
+.loginHead{
+    width: 100%;
+    height:70px;
+    background-color: red;
+    float: left;
+}
+/*系统描述*/
+.systemRemark{
+    float: left;
+}
+.loginBody{
+    position: absolute;
+    top: 40%;
+    left: 40%;
+}
+.loginButton, .loginStatus{
+    margin-top: 10px;
+    margin-left: 42px;
+}
+.loginButton .btn-success{
+    margin-left: 30px;
+}

@@ -1,0 +1,25 @@
+server:
+  port: 8085  #指定服务端口
+#  servlet:
+#    context-path: /a  #设置上下文路径
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/demo
+    username: root
+    password: root
+  thymeleaf:
+    mode: HTML5
+#  mvc:
+#    view:
+#      prefix: /templates/
+#      suffix: .html
+#    static-path-pattern: /static/**  #自定义静态资源路径。springboot只能访问“/static/**”样式的静态资源url请求
+#  resources:
+#    static-locations: ["classpath:/static","classpath:/public","classpath:/resources","classpath:/META-INF/resources"]
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml #指定mybatis的mapper.xml的路径
+  type-handlers-package: com.grateful.demo.frameWork.config #指定枚举统一转换handler的包路径
+
+
