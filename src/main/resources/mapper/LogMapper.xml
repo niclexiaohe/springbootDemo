@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.grateful.demo.content.mapper.LogMapper">
+
+    <sql id="colField">
+        A.id AS id,
+        A.operator AS operator,
+        A.operate_time AS operateTime,
+        A.operate_desc AS operateDesc,
+        A.rank AS rank,
+        A.frozen AS frozen,
+        A.delete_flag AS deleteFlag,
+        A.remark AS remark,
+        A.creator AS creator,
+        A.create_time AS createTime,
+        A.modifier AS modifier,
+        A.modified_time AS modifiedTime
+    </sql>
+
+    <!--插入一条记录-->
+    <insert id="insert" parameterType="com.grateful.demo.content.entity.Log" >
+        INSERT INTO log_t(
+            id,
+            operator,
+            operate_time,
+            operate_desc,
+            rank,
+            frozen,
+            delete_flag,
+            remark,
+            creator,
+            create_time,
+            modifier,
+            modified_time
+        )VALUES (
+            #{id},
+            #{operator},
+            #{operateTime},
+            #{operateDesc},
+            #{rank},
+            #{frozen},
+            #{deleteFlag},
+            #{remark},
+            #{creator},
+            #{createTime},
+            #{modifier},
+            #{modifiedTime}
+        )
+    </insert>
+</mapper>

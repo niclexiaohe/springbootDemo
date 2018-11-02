@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.grateful.demo.content.mapper.UserMapper">
+
+    <sql id="colField">
+        A.id AS id,
+        A.account_name AS accountName,
+        A.user_name AS userName,
+        A.password AS password,
+        A.birth AS birth,
+        A.sex AS sex,
+        A.age AS age,
+        A.tel AS tel,
+        A.email AS email,
+        A.address AS address,
+        A.role_type AS roleType,
+        A.rank AS rank,
+        A.frozen AS frozen,
+        A.delete_flag AS deleteFlag,
+        A.remark AS remark,
+        A.creator AS creator,
+        A.create_time AS createTime,
+        A.modifier AS modifier,
+        A.modified_time AS modifiedTime
+    </sql>
+
+    <!--根据联合索引获取唯一记录-->
+    <select id="findByAccountName" resultType="com.grateful.demo.content.entity.User">
+        SELECT
+          <include refid="colField"/>
+        FROM user_t AS A
+        WHERE A.account_name=#{accountName}
+    </select>
+
+    <!--获取一条记录-->
+    <select id="findOne" resultType="com.grateful.demo.content.entity.User">
+        SELECT
+          <include refid="colField"/>
+        FROM user_t AS A
+        WHERE A.id=#{id}
+     </select>
+
+    <!--插入一条记录-->
+    <insert id="insert" parameterType="com.grateful.demo.content.entity.User" >
+        INSERT INTO user_t(
+            id,
+            account_name,
+            user_name,
+            password,
+            birth,
+            sex,
+            age,
+            tel,
+            email,
+            address,
+            role_type,
+            rank,
+            frozen,
+            delete_flag,
+            remark,
+            creator,
+            create_time,
+            modifier,
+            modified_time
+        )VALUES (
+            #{id},
+            #{accountName},
+            #{userName},
+            #{password},
+            #{birth},
+            #{sex},
+            #{age},
+            #{tel},
+            #{email},
+            #{address},
+            #{roleType},
+            #{rank},
+            #{frozen},
+            #{deleteFlag},
+            #{remark},
+            #{creator},
+            #{createTime},
+            #{modifier},
+            #{modifiedTime}
+        )
+    </insert>
+
+    <!--更新数据-->
+    <update id="update" parameterType="com.grateful.demo.content.entity.User">
+        UPDATE user_t SET
+        account_name=#{accountName}
+        ,user_name=#{userName}
+        ,password=#{password}
+        <if test="birth != null">
+            ,birth=#{birth}
+        </if>
+        <if test="sex != null">
+            ,sex=#{sex}
+        </if>
+        <if test="age != null">
+            ,age=#{age}
+        </if>
+        <if test="tel != null">
+            ,tel=#{tel}
+        </if>
+        <if test="email != null">
+            ,email=#{email}
+        </if>
+        <if test="address != null">
+            ,address=#{address}
+        </if>
+        ,role_type=#{roleType}
+        <if test="tel != null">
+            ,tel=#{tel}
+        </if>
+        ,rank=#{rank}
+        ,frozen=#{frozen}
+        ,delete_flag=#{deleteFlag}
+        <if test="remark != null">
+            ,remark=#{remark}
+        </if>
+        <if test="creator != null">
+            ,creator=#{creator}
+        </if>
+        ,create_time=#{createTime}
+        <if test="modifier != null">
+            ,modifier=#{modifier}
+        </if>
+        ,modified_time=#{modifiedTime}
+        WHERE id = #{id}
+    </update>
+</mapper>

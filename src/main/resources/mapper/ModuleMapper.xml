@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.grateful.demo.content.mapper.ModuleMapper">
+
+    <sql id="colField">
+        A.id AS id,
+        A.module_code AS moduleCode,
+        A.module_name AS moduleName,
+        A.module_url AS moduleUrl,
+        A.module_img_url AS moduleImgUrl,
+        A.module_parent_code AS moduleParentCode,
+        A.module_parent_rank AS moduleParentRank,
+        A.module_child_rank AS moduleChildRank,
+        A.rank AS rank,
+        A.frozen AS frozen,
+        A.delete_flag AS deleteFlag,
+        A.remark AS remark,
+        A.creator AS creator,
+        A.create_time AS createTime,
+        A.modifier AS modifier,
+        A.modified_time AS modifiedTime
+    </sql>
+
+    <!--根据联合索引获取唯一记录-->
+    <select id="findByModuleCode" resultType="com.grateful.demo.content.entity.Module">
+        SELECT
+          <include refid="colField"/>
+        FROM module_t AS A
+        WHERE A.module_code=#{moduleCode}
+    </select>
+
+    <!--获取一条记录-->
+    <select id="findOne" resultType="com.grateful.demo.content.entity.Module">
+        SELECT
+          <include refid="colField"/>
+        FROM module_t AS A
+        WHERE A.id=#{id}
+     </select>
+
+    <!--插入一条记录-->
+    <insert id="insert" parameterType="com.grateful.demo.content.entity.Module" >
+        INSERT INTO module_t(
+            id,
+            module_code,
+            module_name,
+            module_url,
+            module_img_url,
+            module_parent_code,
+            module_parent_rank,
+            module_child_rank,
+            rank,
+            frozen,
+            delete_flag,
+            remark,
+            creator,
+            create_time,
+            modifier,
+            modified_time
+        )VALUES (
+            #{id},
+            #{moduleCode},
+            #{moduleName},
+            #{moduleUrl},
+            #{moduleImgUrl},
+            #{moduleParentCode},
+            #{moduleParentRank},
+            #{moduleChildRank},
+            #{rank},
+            #{frozen},
+            #{deleteFlag},
+            #{remark},
+            #{creator},
+            #{createTime},
+            #{modifier},
+            #{modifiedTime}
+        )
+    </insert>
+
+    <!--更新数据-->
+    <update id="update" parameterType="com.grateful.demo.content.entity.Module">
+        UPDATE module_t SET
+        module_code=#{moduleCode}
+        ,module_name=#{moduleName}
+        ,module_url=#{moduleUrl}
+        ,module_img_url=#{moduleImgUrl}
+        ,module_parent_code=#{moduleParentCode}
+        ,module_parent_rank=#{moduleParentRank}
+        ,module_child_rank=#{moduleChildRank}
+        ,rank=#{rank}
+        ,frozen=#{frozen}
+        ,delete_flag=#{deleteFlag}
+        <if test="remark != null">
+            ,remark=#{remark}
+        </if>
+        <if test="creator != null">
+            ,creator=#{creator}
+        </if>
+        ,create_time=#{createTime}
+        <if test="modifier != null">
+            ,modifier=#{modifier}
+        </if>
+        ,modified_time=#{modifiedTime}
+        WHERE id = #{id}
+    </update>
+</mapper>
